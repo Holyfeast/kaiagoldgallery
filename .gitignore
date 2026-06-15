@@ -1,0 +1,76 @@
+# General
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/settings.json
+.vs/
+.env
+.env.local
+.env.*.local
+
+# .NET / Visual Studio
+bin/
+obj/
+*.csproj.user
+*.sln.DotSettings.user
+*.suo
+*.sln.lock
+appsettings.Development.json
+appsettings.local.json
+
+# Node.js / npm
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+.npm
+dist/
+build/
+.next/
+.nuxt/
+out/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+!.vscode/extensions.json
+*.code-workspace
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# SQL Server LocalDB
+*.mdf
+*.ldf
+App_Data/
+
+# Docker
+docker-compose.override.yml
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+/dist
+/build
+/.next

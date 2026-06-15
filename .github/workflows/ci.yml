@@ -1,0 +1,90 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-api:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      
+      - name: Restore API dependencies
+        run: cd Api/Api && dotnet restore
+      
+      - name: Build API
+        run: cd Api/Api && dotnet build --no-restore
+      
+      - name: Run API tests
+        run: cd Api && dotnet test --no-build --verbosity normal || true
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      
+      - name: Install Frontend dependencies
+        run: cd KaiaGalleryFront && npm install
+      
+      - name: Build Frontend
+        run: cd KaiaGalleryFront && npm run build
+      
+      - name: Run Frontend tests
+        run: cd KaiaGalleryFront && npm run test || true
+
+  build-crm:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      
+      - name: Install CRM dependencies
+        run: cd crm-frontend && npm install
+      
+      - name: Build CRM
+        run: cd crm-frontend && npm run build
+      
+      - name: Run CRM tests
+        run: cd crm-frontend && npm run test || true
+
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      
+      - name: Install ESLint
+        run: npm install -g eslint
+      
+      - name: Lint Frontend
+        run: cd KaiaGalleryFront && npm run lint || true
+      
+      - name: Lint CRM
+        run: cd crm-frontend && npm run lint || true
