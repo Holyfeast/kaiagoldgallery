@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="گالری طلای کایا — فروشگاه طلا و جواهرات در پاساژ دلگشا">
+  <title>گالری طلای کایا | Kaia Gold Gallery</title>
+  <link rel="stylesheet" href="assets/fonts/vazirmatn/vazirmatn.css">
+  <style>
+    :root {
+      --gold: #c9a227;
+      --gold-light: #e8d48b;
+      --gold-dark: #8b6914;
+      --bg: #0c0b09;
+      --bg-elevated: #141210;
+      --bg-card: #1c1a16;
+      --border: rgba(201, 162, 39, 0.22);
+      --text: #f8f4eb;
+      --text-muted: #9e9480;
+      --header-h: 72px;
+      --radius: 12px;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.75rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 36rem;
+      margin-inline: auto;
+    }
+
+    /* ─── Header ─── */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--header-h);
+      background: rgba(12, 11, 9, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+
+    .header.scrolled { box-shadow: var(--shadow); }
+
+    .header-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .brand-logo {
+      height: 44px;
+      width: auto;
+      max-width: 140px;
+      border-radius: 6px;
+      border: none;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .brand-logo-footer {
+      height: 52px;
+      margin-bottom: 0.75rem;
+    }
+
+    .brand-logo-fallback {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1rem;
+      background: var(--bg-card);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .nav a {
+      padding: 0.5rem 0.85rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold-light);
+      background: rgba(201, 162, 39, 0.1);
+    }
+
+    .header-cta {
+      padding: 0.55rem 1.1rem;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #1a1408;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .header-cta:hover { transform: translateY(-1px); filter: brightness(1.08); }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+
+    /* ─── Slider ─── */
+    .slider-wrap {
+      margin-top: var(--header-h);
+      position: relative;
+      height: clamp(320px, 55vh, 520px);
+      overflow: hidden;
+      background: var(--bg-elevated);
+    }
+
+    .slider-hero {
+      height: 100%;
+      position: relative;
+    }
+
+    .slide-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(12, 11, 9, 0.92) 0%,
+        rgba(12, 11, 9, 0.35) 45%,
+        rgba(12, 11, 9, 0.15) 100%
+      );
+    }
+
+    .slide-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.5rem 0 3rem;
+      z-index: 2;
+    }
+
+    .slide-content h2 {
+      font-size: clamp(1.5rem, 4.5vw, 2.35rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      max-width: 28rem;
+    }
+
+    .slide-content p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 32rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #1a1408;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+    /* ─── Features ─── */
+    .features {
+      background: var(--bg-elevated);
+      border-block: 1px solid var(--border);
+      padding: 2.5rem 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 1.25rem 1rem;
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 0.85rem;
+      border-radius: 50%;
+      background: rgba(201, 162, 39, 0.12);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+    }
+
+    .feature-card h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .feature-card p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── Categories ─── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .category-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 1;
+      border: 1px solid var(--border);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .category-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--gold);
+      opacity: 0.5;
+    }
+
+    .category-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 1rem;
+      background: linear-gradient(transparent 40%, rgba(12, 11, 9, 0.88));
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ─── Products ─── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(201, 162, 39, 0.12);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: rgba(201, 162, 39, 0.4);
+    }
+
+    .product-card.hidden { display: none; }
+
+    .product-img-wrap {
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: #141210;
+      position: relative;
+    }
+
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+
+    .product-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: var(--gold);
+      color: #1a1408;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    .product-body { padding: 1.1rem; }
+
+    .product-cat {
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .product-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .product-price { color: var(--gold-light); font-weight: 600; }
+
+    .product-contact {
+      display: block;
+      text-align: center;
+      margin-top: 0.85rem;
+      padding: 0.55rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--gold);
+      transition: background 0.2s;
+    }
+
+    .product-contact:hover { background: rgba(201, 162, 39, 0.08); }
+
+    /* ─── About ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      background: var(--bg-card);
+    }
+
+    .about-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    .about-placeholder {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .about-text h3 {
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .stat span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── Contact ─── */
+    #contact { background: var(--bg-elevated); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .contact-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    .contact-info-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+      color: var(--gold-light);
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-row:last-child { border-bottom: none; }
+
+    .contact-row .ico {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(201, 162, 39, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-row small {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-row a { color: var(--gold-light); }
+    .contact-row a:hover { text-decoration: underline; }
+
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    .contact-form h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-group textarea { min-height: 110px; resize: vertical; }
+
+    /* ─── Footer ─── */
+    .footer {
+      background: #080706;
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin: 1rem 0;
+      max-width: 22rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .social-links a {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .social-links a:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201, 162, 39, 0.1);
+    }
+
+    .footer-col h4 {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      color: var(--gold-light);
+    }
+
+    .footer-links { list-style: none; }
+
+    .footer-links li { margin-bottom: 0.5rem; }
+
+    .footer-links a {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold-light); }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .newsletter-form button {
+      padding: 0.65rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: var(--gold);
+      color: #1a1408;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 1.25rem 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 900px) {
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; align-items: center; justify-content: center; }
+
+      .nav {
+        position: fixed;
+        top: var(--header-h);
+        right: 0;
+        left: 0;
+        flex-direction: column;
+        background: rgba(12, 11, 9, 0.98);
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+        transform: translateY(-120%);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
+      }
+
+      .nav.open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .nav a { width: 100%; text-align: center; padding: 0.75rem; }
+
+      .header-cta { display: none; }
+
+      .footer-grid { grid-template-columns: 1fr; }
+
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#home" class="brand">
+        <img src="images/product/logo.jpg" alt="گالری طلای کایا — Kaia Gold" class="brand-logo">
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="منو" type="button">☰</button>
+
+      <nav class="nav" id="mainNav">
+        <a href="#home">خانه</a>
+        <a href="#products">محصولات</a>
+        <a href="#categories">دسته‌بندی</a>
+        <a href="#about">درباره ما</a>
+        <a href="#contact">تماس با ما</a>
+      </nav>
+
+      <a href="tel:+989121230863" class="header-cta">تماس فوری</a>
+    </div>
+  </header>
+
+  <!-- Hero Video -->
+  <section class="slider-wrap" id="home">
+    <div class="slider-hero">
+      <video class="slide-video" autoplay muted loop playsinline poster="images/product/13.jpg">
+        <source src="images/product/15.mp4" type="video/mp4">
+      </video>
+      <div class="slide-overlay"></div>
+      <div class="slide-content container">
+        <h2>گالری طلای کایا</h2>
+        <p>مجموعه‌ای از زیباترین طرح‌های طلا و جواهر — اصالت، کیفیت و اطمینان خرید</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.65rem">
+          <a href="#products" class="btn btn-primary">مشاهده محصولات</a>
+          <a href="https://www.instagram.com/kaiagoldgallery?igsh=cDV6ZnJycHF0M2c2" class="btn btn-outline" target="_blank" rel="noopener noreferrer">اینستاگرام</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" aria-label="مزایا">
+    <div class="container features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>تضمین کیفیت</h3>
+        <p>طلای دارای عیار و مهر استاندارد — شفافیت کامل در فاکتور</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>تحویل سریع</h3>
+        <p>آماده‌سازی و تحویل سفارش‌های آماده در کوتاه‌ترین زمان</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡</div>
+        <h3>ضمانت اصالت</h3>
+        <p>خرید مطمئن با پشتیبانی و مشاوره تخصصی طلا</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✦</div>
+        <h3>طراحی منحصربه‌فرد</h3>
+        <p>مدل‌های روز و سفارشی‌سازی بر اساس سلیقه مشتری</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>مشاوره رایگان</h3>
+        <p>راهنمایی در انتخاب وزن، عیار و مدل مناسب شما</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">دسته‌بندی</span>
+        <h2 class="section-title">دسته‌بندی محصولات</h2>
+        <p class="section-desc">انتخاب دسته برای مشاهده محصولات مرتبط</p>
+      </div>
+      <div class="categories-grid">
+        <a href="#products" class="category-card" data-filter="rings">
+          <img src="images/product/1.jpg" alt="انگشتر">
+          <span class="category-label">انگشتر</span>
+        </a>
+        <a href="#products" class="category-card" data-filter="necklaces">
+          <img src="images/product/2.jpg" alt="گردنبند">
+          <span class="category-label">گردنبند</span>
+        </a>
+        <a href="#products" class="category-card" data-filter="bracelets">
+          <img src="images/product/3.jpg" alt="دستبند">
+          <span class="category-label">دستبند</span>
+        </a>
+        <a href="#products" class="category-card" data-filter="sets">
+          <img src="images/product/4.jpg" alt="ست">
+          <span class="category-label">ست و نیم‌ست</span>
+        </a>
+        <a href="#products" class="category-card" data-filter="coins">
+          <img src="images/product/5.jpg" alt="سکه">
+          <span class="category-label">سکه و شمش</span>
+        </a>
+        <a href="#products" class="category-card" data-filter="custom">
+          <img src="images/product/6.jpg" alt="سفارشی">
+          <span class="category-label">سفارشی</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">فروشگاه</span>
+        <h2 class="section-title">لیست محصولات</h2>
+        <p class="section-desc">برای استعلام قیمت روز با شماره ۰۹۱۲۱۲۳۰۸۶۳ تماس بگیرید</p>
+      </div>
+
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" type="button" data-filter="all">همه</button>
+        <button class="filter-btn" type="button" data-filter="rings">انگشتر</button>
+        <button class="filter-btn" type="button" data-filter="necklaces">گردنبند</button>
+        <button class="filter-btn" type="button" data-filter="bracelets">دستبند</button>
+        <button class="filter-btn" type="button" data-filter="sets">ست</button>
+        <button class="filter-btn" type="button" data-filter="coins">سکه</button>
+        <button class="filter-btn" type="button" data-filter="custom">سفارشی</button>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- محصول ۱ — نام و قیمت را ویرایش کنید -->
+        <article class="product-card" data-category="rings">
+          <div class="product-img-wrap">
+            <img src="images/product/1.jpg" alt="محصول ۱">
+            <span class="product-badge">جدید</span>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">انگشتر</div>
+            <h3 class="product-title">انگشتر طلا ۱۸ عیار — مدل کلاسیک</h3>
+            <div class="product-meta">
+              <span>وزن تقریبی: ۲.۵ گرم</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="necklaces">
+          <div class="product-img-wrap">
+            <img src="images/product/2.jpg" alt="محصول ۲">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">گردنبند</div>
+            <h3 class="product-title">گردنبند طلا با آویز ظریف</h3>
+            <div class="product-meta">
+              <span>وزن تقریبی: ۴ گرم</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="bracelets">
+          <div class="product-img-wrap">
+            <img src="images/product/3.jpg" alt="محصول ۳">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">دستبند</div>
+            <h3 class="product-title">دستبند بافت طلا</h3>
+            <div class="product-meta">
+              <span>وزن تقریبی: ۳ گرم</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="sets">
+          <div class="product-img-wrap">
+            <img src="images/product/4.jpg" alt="محصول ۴">
+            <span class="product-badge">پرفروش</span>
+          </div>
+          <div class="product-body">
+            <div class="product-cat">ست</div>
+            <h3 class="product-title">نیم‌ست طلا — گوشواره و گردنبند</h3>
+            <div class="product-meta">
+              <span>ست کامل</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="rings">
+          <div class="product-img-wrap">
+            <img src="images/product/5.jpg" alt="محصول ۵">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">انگشتر</div>
+            <h3 class="product-title">انگشتر نامزدی — طرح مدرن</h3>
+            <div class="product-meta">
+              <span>سفارشی</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="coins">
+          <div class="product-img-wrap">
+            <img src="images/product/6.jpg" alt="محصول ۶">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">سکه</div>
+            <h3 class="product-title">سکه پارسیان / تمام بهار</h3>
+            <div class="product-meta">
+              <span>قیمت روز</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="necklaces">
+          <div class="product-img-wrap">
+            <img src="images/product/7.jpg" alt="محصول ۷">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">گردنبند</div>
+            <h3 class="product-title">زنجیر طلا — ضخامت متوسط</h3>
+            <div class="product-meta">
+              <span>وزن متغیر</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="custom">
+          <div class="product-img-wrap">
+            <img src="images/product/8.jpg" alt="محصول ۸">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">سفارشی</div>
+            <h3 class="product-title">سفارش اختصاصی طلا و جواهر</h3>
+            <div class="product-meta">
+              <span>طراحی دلخواه</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">ثبت سفارش</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="bracelets">
+          <div class="product-img-wrap">
+            <img src="images/product/9.jpg" alt="محصول ۹">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">دستبند</div>
+            <h3 class="product-title">دستبند طلا — مدل ویژه</h3>
+            <div class="product-meta">
+              <span>۱۸ عیار</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="sets">
+          <div class="product-img-wrap">
+            <img src="images/product/10.jpg" alt="محصول ۱۰">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">ست</div>
+            <h3 class="product-title">ست طلا و جواهر</h3>
+            <div class="product-meta">
+              <span>ست کامل</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="rings">
+          <div class="product-img-wrap">
+            <img src="images/product/11.jpg" alt="محصول ۱۱">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">انگشتر</div>
+            <h3 class="product-title">انگشتر طلا — طرح لوکس</h3>
+            <div class="product-meta">
+              <span>۱۸ عیار</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="necklaces">
+          <div class="product-img-wrap">
+            <img src="images/product/12.jpg" alt="محصول ۱۲">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">گردنبند</div>
+            <h3 class="product-title">گردنبند طلا — مدل کلاسیک</h3>
+            <div class="product-meta">
+              <span>۱۸ عیار</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="coins">
+          <div class="product-img-wrap">
+            <img src="images/product/13.jpg" alt="محصول ۱۳">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">سکه</div>
+            <h3 class="product-title">سکه و شمش طلا</h3>
+            <div class="product-meta">
+              <span>قیمت روز</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">استعلام قیمت</a>
+          </div>
+        </article>
+
+        <article class="product-card" data-category="custom">
+          <div class="product-img-wrap">
+            <img src="images/product/14.jpg" alt="محصول ۱۴">
+          </div>
+          <div class="product-body">
+            <div class="product-cat">سفارشی</div>
+            <h3 class="product-title">طراحی و ساخت اختصاصی</h3>
+            <div class="product-meta">
+              <span>سفارشی</span>
+              <span class="product-price">تماس بگیرید</span>
+            </div>
+            <a href="tel:+989121230863" class="product-contact">ثبت سفارش</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">درباره ما</span>
+        <h2 class="section-title">گالری طلای کایا</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="images/product/11.jpg" alt="گالری طلای کایا">
+        </div>
+        <div class="about-text">
+          <h3>داستان ما</h3>
+          <p>
+            گالری طلای کایا با تکیه بر سال‌ها تجربه در صنف طلا و جواهر، در قلب پاساژ دلگشا فعالیت می‌کند.
+            هدف ما ارائه طلای باکیفیت، قیمت‌گذاری شفاف و خدماتی است که خرید را برای شما آسان و مطمئن کند.
+          </p>
+          <p>
+            از انگشتر و گردنبند گرفته تا سکه، شمش و سفارش‌های اختصاصی — تیم ما همراه شماست تا بهترین انتخاب را داشته باشید.
+            برای مشاهده مدل‌های بیشتر، صفحه اینستاگرام ما را دنبال کنید.
+          </p>
+          <div class="about-stats">
+            <div class="stat">
+              <strong>۱۸</strong>
+              <span>عیار استاندارد</span>
+            </div>
+            <div class="stat">
+              <strong>۱۰۰٪</strong>
+              <span>شفافیت در خرید</span>
+            </div>
+            <div class="stat">
+              <strong>۷</strong>
+              <span>روز هفته پاسخگو</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">تماس</span>
+        <h2 class="section-title">تماس با ما</h2>
+        <p class="section-desc">برای استعلام قیمت، مشاوره یا بازدید حضوری با ما در ارتباط باشید</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info-card">
+          <h3>اطلاعات تماس</h3>
+          <div class="contact-row">
+            <span class="ico">☎</span>
+            <div>
+              <small>تلفن</small>
+              <a href="tel:+989121230863">۰۹۱۲۱۲۳۰۸۶۳</a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="ico">📍</span>
+            <div>
+              <small>آدرس</small>
+              پاساژ دلگشا، طبقه مثبت سه، پلاک ۸۶
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="ico">📷</span>
+            <div>
+              <small>اینستاگرام</small>
+              <a href="https://www.instagram.com/kaiagoldgallery?igsh=cDV6ZnJycHF0M2c2" target="_blank" rel="noopener noreferrer">@kaiagoldgallery</a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="ico">🕐</span>
+            <div>
+              <small>ساعات کاری</small>
+              شنبه تا پنج‌شنبه — ۱۰ تا ۲۱ | جمعه‌ها با هماهنگی
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <h3>فرم پیام</h3>
+          <div class="form-group">
+            <label for="name">نام و نام خانوادگی</label>
+            <input type="text" id="name" name="name" required placeholder="نام شما">
+          </div>
+          <div class="form-group">
+            <label for="phone">شماره تماس</label>
+            <input type="tel" id="phone" name="phone" required placeholder="۰۹۱۲...">
+          </div>
+          <div class="form-group">
+            <label for="message">پیام</label>
+            <textarea id="message" name="message" placeholder="سوال یا درخواست خود را بنویسید..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">ارسال پیام</button>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.75rem;text-align:center">
+            پس از ثبت، برای پیگیری سریع‌تر می‌توانید مستقیم تماس بگیرید.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="brand">
+          <img src="images/product/logo.jpg" alt="گالری طلای کایا" class="brand-logo brand-logo-footer">
+        </a>
+        <p>فروشگاه تخصصی طلا و جواهرات در پاساژ دلگشا — کیفیت، اصالت و اعتماد.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/kaiagoldgallery?igsh=cDV6ZnJycHF0M2c2" target="_blank" rel="noopener noreferrer" title="اینستاگرام">IG</a>
+          <a href="tel:+989121230863" title="تماس">☎</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>دسترسی سریع</h4>
+        <ul class="footer-links">
+          <li><a href="#home">خانه</a></li>
+          <li><a href="#products">محصولات</a></li>
+          <li><a href="#categories">دسته‌بندی</a></li>
+          <li><a href="#about">درباره ما</a></li>
+          <li><a href="#contact">تماس با ما</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>خدمات</h4>
+        <ul class="footer-links">
+          <li><a href="#products">خرید طلا</a></li>
+          <li><a href="#products" data-filter-link="custom">سفارش اختصاصی</a></li>
+          <li><a href="#contact">مشاوره رایگان</a></li>
+          <li><a href="tel:+989121230863">استعلام قیمت روز</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>خبرنامه</h4>
+        <p style="font-size:0.85rem;color:var(--text-muted)">از تخفیف‌ها و مدل‌های جدید باخبر شوید.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" name="email" placeholder="ایمیل شما" required aria-label="ایمیل">
+          <button type="submit">عضویت</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      © <span id="year"></span> گالری طلای کایا — Kaia Gold Gallery. تمامی حقوق محفوظ است.
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var header = document.getElementById("header");
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* Hero video — تلاش برای پخش در موبایل */
+      var heroVideo = document.querySelector(".slide-video");
+      if (heroVideo) {
+        heroVideo.play().catch(function () {});
+      }
+
+      window.addEventListener("scroll", function () {
+        header.classList.toggle("scrolled", window.scrollY > 20);
+      });
+
+      /* Mobile menu */
+      var menuToggle = document.getElementById("menuToggle");
+      var mainNav = document.getElementById("mainNav");
+      menuToggle.addEventListener("click", function () {
+        mainNav.classList.toggle("open");
+      });
+      mainNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          mainNav.classList.remove("open");
+        });
+      });
+
+      /* Active nav on scroll */
+      var sections = document.querySelectorAll("section[id], .slider-wrap");
+      var navLinks = mainNav.querySelectorAll("a");
+      window.addEventListener("scroll", function () {
+        var scrollY = window.pageYOffset;
+        sections.forEach(function (sec) {
+          var id = sec.getAttribute("id");
+          if (!id) return;
+          var top = sec.offsetTop - 100;
+          var height = sec.offsetHeight;
+          if (scrollY >= top && scrollY < top + height) {
+            navLinks.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+            });
+          }
+        });
+      });
+
+      /* Product filter */
+      var filterBtns = document.querySelectorAll(".filter-btn");
+      var productCards = document.querySelectorAll(".product-card");
+
+      function filterProducts(cat) {
+        filterBtns.forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.filter === cat);
+        });
+        productCards.forEach(function (card) {
+          var show = cat === "all" || card.dataset.category === cat;
+          card.classList.toggle("hidden", !show);
+        });
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          filterProducts(btn.dataset.filter);
+        });
+      });
+
+      document.querySelectorAll(".category-card[data-filter]").forEach(function (card) {
+        card.addEventListener("click", function (e) {
+          e.preventDefault();
+          var cat = card.dataset.filter;
+          filterProducts(cat);
+          document.getElementById("products").scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      document.querySelectorAll("[data-filter-link]").forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          var cat = link.getAttribute("data-filter-link");
+          if (cat) {
+            e.preventDefault();
+            filterProducts(cat);
+            document.getElementById("products").scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+
+      /* Forms — نمایشی؛ برای ارسال واقعی به سرور نیاز به بک‌اند دارید */
+      document.getElementById("contactForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var phone = document.getElementById("phone").value.replace(/\s/g, "");
+        window.location.href = "tel:+989121230863";
+        alert("پیام شما ثبت شد. برای پاسخ سریع‌تر با شماره ۰۹۱۲۱۲۳۰۸۶۳ تماس بگیرید.");
+        e.target.reset();
+      });
+
+      document.getElementById("newsletterForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("عضویت در خبرنامه با موفقیت ثبت شد. از همراهی شما سپاسگزاریم.");
+        e.target.reset();
+      });
+    })();
+  </script>
+</body>
+</html>
